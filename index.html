@@ -3,283 +3,481 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPK Hero MLBB – Metode AHP-TOPSIS</title>
+  <title>SPK Hero MLBB – AHP-TOPSIS | Epic Tier</title>
   <meta name="description" content="Sistem Pendukung Keputusan pemilihan Hero Mobile Legends Bang Bang tier Epic menggunakan metode AHP-TOPSIS berdasarkan 30 responden." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mlbb-style.css" />
 </head>
 <body>
 
-  <!-- Animated background -->
-  <div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-  </div>
+  <!-- ===== NOISE OVERLAY ===== -->
+  <div class="noise-overlay"></div>
 
-  <!-- Particle canvas -->
+  <!-- ===== BG TEXTURE ===== -->
+  <div class="bg-texture"></div>
+
+  <!-- ===== BATTLEFIELD PARTICLES ===== -->
   <canvas id="particles-canvas"></canvas>
+
+  <!-- ===== LIGHTNING LINES ===== -->
+  <div class="lightning-container">
+    <div class="lightning l1"></div>
+    <div class="lightning l2"></div>
+    <div class="lightning l3"></div>
+  </div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
+      <!-- Logo -->
       <div class="nav-logo">
-        <span class="logo-icon">⚔️</span>
-        <span class="logo-text">SPK <span class="logo-accent">MLBB</span></span>
+        <div class="logo-emblem">
+          <svg viewBox="0 0 40 40" width="36" height="36">
+            <polygon points="20,2 38,11 38,29 20,38 2,29 2,11" fill="none" stroke="#c8a84b" stroke-width="2"/>
+            <polygon points="20,8 32,14 32,26 20,32 8,26 8,14" fill="rgba(200,168,75,0.12)" stroke="#c8a84b" stroke-width="1"/>
+            <text x="20" y="25" text-anchor="middle" fill="#c8a84b" font-size="14" font-weight="bold" font-family="serif">M</text>
+          </svg>
+        </div>
+        <div class="logo-text-block">
+          <span class="logo-main">SPK HERO</span>
+          <span class="logo-sub">MOBILE LEGENDS</span>
+        </div>
       </div>
-      <ul class="nav-links">
-        <li><a href="#hero-section" class="nav-link active">Beranda</a></li>
-        <li><a href="#kriteria-section" class="nav-link">Kriteria</a></li>
-        <li><a href="#matriks-section" class="nav-link">Matriks</a></li>
-        <li><a href="#topsis-section" class="nav-link">TOPSIS</a></li>
-        <li><a href="#ranking-section" class="nav-link">Ranking</a></li>
-        <li><a href="#simulator-section" class="nav-link">Simulator</a></li>
+
+      <!-- Nav links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero-section"    class="nav-link active" id="nav-beranda">Beranda</a></li>
+        <li><a href="#kriteria-section" class="nav-link"       id="nav-kriteria">Kriteria</a></li>
+        <li><a href="#matriks-section"  class="nav-link"       id="nav-matriks">Matriks</a></li>
+        <li><a href="#topsis-section"   class="nav-link"       id="nav-topsis">TOPSIS</a></li>
+        <li><a href="#ranking-section"  class="nav-link"       id="nav-ranking">Ranking</a></li>
+        <li><a href="#simulator-section" class="nav-link"      id="nav-sim">Simulator</a></li>
       </ul>
-      <div class="nav-badge">AHP-TOPSIS</div>
+
+      <!-- Badge -->
+      <div class="nav-tier-badge">
+        <div class="tier-diamond"></div>
+        <span>EPIC TIER</span>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#hero-section" class="mob-link">Beranda</a>
+    <a href="#kriteria-section" class="mob-link">Kriteria</a>
+    <a href="#matriks-section" class="mob-link">Matriks</a>
+    <a href="#topsis-section" class="mob-link">TOPSIS</a>
+    <a href="#ranking-section" class="mob-link">Ranking</a>
+    <a href="#simulator-section" class="mob-link">Simulator</a>
+  </div>
+
   <!-- ===== HERO SECTION ===== -->
   <section id="hero-section" class="hero-section">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Sistem Pendukung Keputusan · Epic Tier
+    <div class="hero-bg-glow hero-bg-glow-left"></div>
+    <div class="hero-bg-glow hero-bg-glow-right"></div>
+
+    <div class="hero-layout">
+      <!-- Left: text -->
+      <div class="hero-content">
+        <div class="mlbb-badge">
+          <div class="badge-icon-row">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#c8a84b" d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <span>Sistem Pendukung Keputusan &nbsp;·&nbsp; Epic Tier</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="title-line-sm">PEMILIHAN HERO</span>
+          <span class="title-line-lg">MOBILE LEGENDS</span>
+          <span class="title-line-md gold-text">BANG BANG</span>
+        </h1>
+
+        <div class="hero-divider">
+          <div class="divider-line"></div>
+          <div class="divider-gem">
+            <svg viewBox="0 0 20 20" width="20" height="20">
+              <polygon points="10,1 19,7 19,13 10,19 1,13 1,7" fill="#c8a84b" opacity="0.9"/>
+              <polygon points="10,4 16,8 16,12 10,16 4,12 4,8" fill="#1a0a2e" opacity="0.8"/>
+              <polygon points="10,6 14,9 14,11 10,14 6,11 6,9" fill="#c8a84b" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="divider-line"></div>
+        </div>
+
+        <p class="hero-subtitle">
+          Metode <strong>AHP-TOPSIS</strong> — 5 kriteria utama · 5 tipe hero · <strong>30 responden</strong> Epic Tier. Temukan hero paling optimal untuk duel di medan pertempuran!
+        </p>
+
+        <div class="hero-stats-row">
+          <div class="stat-gem-card">
+            <div class="sgc-icon">
+              <!-- Shield SVG -->
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <path d="M16 2L4 7V16C4 22 9 27 16 30C23 27 28 22 28 16V7L16 2Z" fill="rgba(200,168,75,0.15)" stroke="#c8a84b" stroke-width="1.5"/>
+                <path d="M16 6L8 10V16C8 20.4 11.6 24.3 16 26.3C20.4 24.3 24 20.4 24 16V10L16 6Z" fill="rgba(200,168,75,0.1)"/>
+                <text x="16" y="21" text-anchor="middle" fill="#c8a84b" font-size="11" font-weight="bold" font-family="serif">5</text>
+              </svg>
+            </div>
+            <div class="sgc-val">5</div>
+            <div class="sgc-label">Tipe Hero</div>
+          </div>
+          <div class="stat-gem-card">
+            <div class="sgc-icon">
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <polygon points="16,2 20,12 30,12 22,18 25,28 16,22 7,28 10,18 2,12 12,12" fill="rgba(200,168,75,0.15)" stroke="#c8a84b" stroke-width="1.5"/>
+                <text x="16" y="21" text-anchor="middle" fill="#c8a84b" font-size="11" font-weight="bold" font-family="serif">5</text>
+              </svg>
+            </div>
+            <div class="sgc-val">5</div>
+            <div class="sgc-label">Kriteria</div>
+          </div>
+          <div class="stat-gem-card">
+            <div class="sgc-icon">
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <circle cx="16" cy="12" r="5" fill="rgba(200,168,75,0.15)" stroke="#c8a84b" stroke-width="1.5"/>
+                <path d="M6 26C6 21 10 18 16 18C22 18 26 21 26 26" fill="none" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="sgc-val">30</div>
+            <div class="sgc-label">Responden</div>
+          </div>
+          <div class="stat-gem-card">
+            <div class="sgc-icon">
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <path d="M8 24L16 4L24 24" fill="none" stroke="#c8a84b" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M11 18H21" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="sgc-val">AHP</div>
+            <div class="sgc-label">Bobot</div>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#ranking-section" class="mlbb-btn mlbb-btn-primary" id="btn-lihat-ranking">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path fill="currentColor" d="M10 2L12.39 7.26L18 8.27L14 12.14L14.9 18.01L10 15.27L5.1 18.01L6 12.14L2 8.27L7.61 7.26L10 2Z"/></svg>
+            Lihat Ranking
+          </a>
+          <a href="#simulator-section" class="mlbb-btn mlbb-btn-secondary" id="btn-simulator">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path fill="currentColor" d="M10 1L13 7H19L14 11L16 17L10 13L4 17L6 11L1 7H7L10 1Z" opacity="0.7"/><circle cx="10" cy="10" r="3" fill="currentColor"/></svg>
+            Coba Simulator
+          </a>
+        </div>
       </div>
-      <h1 class="hero-title">
-        Pemilihan Hero<br />
-        <span class="gradient-text">Mobile Legends</span><br />
-        Terbaik
-      </h1>
-      <p class="hero-subtitle">
-        Menggunakan metode <strong>AHP-TOPSIS</strong> dengan 5 kriteria utama
-        berdasarkan penilaian <strong>30 responden</strong> Epic Tier.
-        Temukan hero yang paling optimal untuk dimainkan!
-      </p>
-      <div class="hero-stats">
-        <div class="stat-card">
-          <span class="stat-number">5</span>
-          <span class="stat-label">Tipe Hero</span>
+
+      <!-- Right: floating hero cards -->
+      <div class="hero-visual">
+        <div class="mlbb-rank-badge-wrap">
+          <img src="mlbb_epic_rank.png" alt="Epic Rank" class="mlbb-rank-img" />
+          <div class="rank-glow-ring"></div>
         </div>
-        <div class="stat-card">
-          <span class="stat-number">5</span>
-          <span class="stat-label">Kriteria</span>
+
+        <div class="hero-card-stack">
+          <div class="mlbb-hcard mlbb-hcard-1" id="hcard-fighter">
+            <div class="hcard-corner hcard-corner-tl"></div>
+            <div class="hcard-corner hcard-corner-tr"></div>
+            <div class="hcard-corner hcard-corner-bl"></div>
+            <div class="hcard-corner hcard-corner-br"></div>
+            <div class="hcard-rank-label">RANK #1</div>
+            <div class="hcard-role-icon">
+              <!-- Fighter SVG icon -->
+              <svg viewBox="0 0 60 60" width="52" height="52">
+                <circle cx="30" cy="30" r="28" fill="rgba(255,140,0,0.1)" stroke="#ff8c00" stroke-width="1.5"/>
+                <path d="M20 40L30 15L40 40" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M18 34H42" stroke="#ff8c00" stroke-width="2" stroke-linecap="round"/>
+                <path d="M22 40H38" stroke="#ff8c00" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="30" cy="15" r="3" fill="#ff8c00"/>
+                <line x1="15" y1="28" x2="45" y2="28" stroke="#ff8c00" stroke-width="1" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="hcard-name">Fighter</div>
+            <div class="hcard-examples">Chou · Yu Zhong · Lapu-Lapu</div>
+            <div class="hcard-score-block">
+              <span class="hcard-score-label">SKOR TOPSIS</span>
+              <span class="hcard-score-val">0.8527</span>
+            </div>
+          </div>
+
+          <div class="mlbb-hcard mlbb-hcard-2" id="hcard-tank">
+            <div class="hcard-corner hcard-corner-tl"></div>
+            <div class="hcard-corner hcard-corner-tr"></div>
+            <div class="hcard-corner hcard-corner-bl"></div>
+            <div class="hcard-corner hcard-corner-br"></div>
+            <div class="hcard-rank-label">RANK #2</div>
+            <div class="hcard-role-icon">
+              <svg viewBox="0 0 60 60" width="52" height="52">
+                <circle cx="30" cy="30" r="28" fill="rgba(100,150,255,0.1)" stroke="#6496ff" stroke-width="1.5"/>
+                <path d="M30 10L46 18V30C46 39 38 46 30 50C22 46 14 39 14 30V18L30 10Z" fill="rgba(100,150,255,0.1)" stroke="#6496ff" stroke-width="2"/>
+                <path d="M30 17L40 22V30C40 36 35 41 30 43.5C25 41 20 36 20 30V22L30 17Z" fill="rgba(100,150,255,0.15)"/>
+                <line x1="30" y1="22" x2="30" y2="38" stroke="#6496ff" stroke-width="2" stroke-linecap="round"/>
+                <line x1="22" y1="30" x2="38" y2="30" stroke="#6496ff" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="hcard-name">Tank/Roamer</div>
+            <div class="hcard-examples">Tigreal · Khufra · Gatot Kaca</div>
+            <div class="hcard-score-block">
+              <span class="hcard-score-label">SKOR TOPSIS</span>
+              <span class="hcard-score-val">0.6978</span>
+            </div>
+          </div>
+
+          <div class="mlbb-hcard mlbb-hcard-3" id="hcard-mage">
+            <div class="hcard-corner hcard-corner-tl"></div>
+            <div class="hcard-corner hcard-corner-tr"></div>
+            <div class="hcard-corner hcard-corner-bl"></div>
+            <div class="hcard-corner hcard-corner-br"></div>
+            <div class="hcard-rank-label">RANK #3</div>
+            <div class="hcard-role-icon">
+              <svg viewBox="0 0 60 60" width="52" height="52">
+                <circle cx="30" cy="30" r="28" fill="rgba(180,100,255,0.1)" stroke="#b464ff" stroke-width="1.5"/>
+                <line x1="30" y1="8" x2="30" y2="46" stroke="#b464ff" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="30" cy="12" r="5" fill="rgba(180,100,255,0.3)" stroke="#b464ff" stroke-width="1.5"/>
+                <circle cx="30" cy="12" r="2.5" fill="#b464ff"/>
+                <circle cx="20" cy="24" r="2" fill="#b464ff" opacity="0.6"/>
+                <circle cx="40" cy="22" r="1.5" fill="#b464ff" opacity="0.5"/>
+                <circle cx="18" cy="36" r="1.5" fill="#b464ff" opacity="0.4"/>
+                <circle cx="42" cy="34" r="2" fill="#b464ff" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="hcard-name">Mage</div>
+            <div class="hcard-examples">Pharsa · Kadita · Odette</div>
+            <div class="hcard-score-block">
+              <span class="hcard-score-label">SKOR TOPSIS</span>
+              <span class="hcard-score-val">0.5152</span>
+            </div>
+          </div>
         </div>
-        <div class="stat-card">
-          <span class="stat-number">30</span>
-          <span class="stat-label">Responden</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">AHP</span>
-          <span class="stat-label">Metode Bobot</span>
-        </div>
-      </div>
-      <div class="hero-cta">
-        <a href="#ranking-section" class="btn-primary" id="btn-lihat-ranking">
-          🏆 Lihat Ranking
-        </a>
-        <a href="#simulator-section" class="btn-secondary" id="btn-simulator">
-          🎮 Coba Simulator
-        </a>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card-stack">
-        <div class="hcard hcard-1">
-          <div class="hcard-rank">#1</div>
-          <div class="hcard-icon">⚔️</div>
-          <div class="hcard-name">Fighter</div>
-          <div class="hcard-score">0.8527</div>
-        </div>
-        <div class="hcard hcard-2">
-          <div class="hcard-rank">#2</div>
-          <div class="hcard-icon">🛡️</div>
-          <div class="hcard-name">Tank</div>
-          <div class="hcard-score">0.6978</div>
-        </div>
-        <div class="hcard hcard-3">
-          <div class="hcard-rank">#3</div>
-          <div class="hcard-icon">🔮</div>
-          <div class="hcard-name">Mage</div>
-          <div class="hcard-score">0.5152</div>
-        </div>
-      </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
     </div>
   </section>
 
+  <!-- ===== SECTION DIVIDER ===== -->
+  <div class="section-divider">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" width="100%" height="40">
+      <path d="M0,20 L120,5 L360,30 L600,10 L840,32 L1080,8 L1320,28 L1440,15 L1440,40 L0,40Z" fill="rgba(200,168,75,0.08)"/>
+      <path d="M0,25 L200,12 L440,35 L680,15 L920,38 L1160,12 L1400,30 L1440,20" fill="none" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+    </svg>
+  </div>
+
   <!-- ===== KRITERIA SECTION ===== -->
-  <section id="kriteria-section" class="section">
+  <section id="kriteria-section" class="mlbb-section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Step 1</div>
-        <h2 class="section-title">Kriteria & Bobot <span class="gradient-text">AHP</span></h2>
-        <p class="section-desc">
-          Lima kriteria penilaian dengan bobot dihitung menggunakan metode AHP.
-          CR = 0.0996 &lt; 0.1 → Konsisten.
-        </p>
+      <div class="mlbb-section-header">
+        <div class="mlbb-step-tag">
+          <div class="step-diamond">
+            <svg viewBox="0 0 16 16" width="12" height="12"><polygon points="8,1 15,8 8,15 1,8" fill="#c8a84b"/></svg>
+          </div>
+          LANGKAH 1
+        </div>
+        <h2 class="mlbb-section-title">Kriteria <span class="gold-text">&amp; Bobot AHP</span></h2>
+        <p class="mlbb-section-desc">Lima kriteria penilaian hero dengan bobot dihitung via metode AHP. CR = 0.0996 &lt; 0.1 → <span class="gold-text">Konsisten ✓</span></p>
+        <div class="title-ornament">
+          <div class="orn-line"></div>
+          <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="#c8a84b" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="#c8a84b" opacity="0.3"/></svg>
+          <div class="orn-line"></div>
+        </div>
       </div>
 
       <div class="criteria-grid" id="criteria-grid">
         <!-- filled by JS -->
       </div>
 
-      <!-- AHP Weight Chart -->
-      <div class="chart-wrapper glass-card">
-        <h3 class="chart-title">Distribusi Bobot AHP</h3>
-        <div class="bar-chart" id="ahp-bar-chart">
-          <!-- filled by JS -->
+      <div class="mlbb-panel" style="margin-top:2rem;">
+        <div class="panel-header">
+          <div class="panel-title-gem"></div>
+          <h3 class="panel-title">Distribusi Bobot AHP</h3>
         </div>
+        <div class="bar-chart" id="ahp-bar-chart"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== MATRIKS KEPUTUSAN ===== -->
-  <section id="matriks-section" class="section section-alt">
+  <div class="section-divider section-divider-flip">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" width="100%" height="40">
+      <path d="M0,20 L120,35 L360,10 L600,30 L840,8 L1080,32 L1320,12 L1440,25 L1440,0 L0,0Z" fill="rgba(200,168,75,0.06)"/>
+    </svg>
+  </div>
+
+  <!-- ===== MATRIKS SECTION ===== -->
+  <section id="matriks-section" class="mlbb-section mlbb-section-dark">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Step 2</div>
-        <h2 class="section-title">Matriks <span class="gradient-text">Keputusan</span></h2>
-        <p class="section-desc">
-          Nilai rata-rata penilaian 30 responden Epic Tier (skala 1–5) per tipe hero.
-        </p>
+      <div class="mlbb-section-header">
+        <div class="mlbb-step-tag">
+          <div class="step-diamond"><svg viewBox="0 0 16 16" width="12" height="12"><polygon points="8,1 15,8 8,15 1,8" fill="#c8a84b"/></svg></div>
+          LANGKAH 2
+        </div>
+        <h2 class="mlbb-section-title">Matriks <span class="gold-text">Keputusan</span></h2>
+        <p class="mlbb-section-desc">Nilai rata-rata penilaian 30 responden Epic Tier (skala 1–5) per tipe hero.</p>
+        <div class="title-ornament"><div class="orn-line"></div><svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="#c8a84b" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="#c8a84b" opacity="0.3"/></svg><div class="orn-line"></div></div>
       </div>
 
-      <!-- Tab selector -->
       <div class="tab-bar" id="tab-bar">
-        <button class="tab-btn active" data-tab="raw" id="tab-raw">A. Matriks Awal</button>
-        <button class="tab-btn" data-tab="norm" id="tab-norm">B. Normalisasi</button>
-        <button class="tab-btn" data-tab="weighted" id="tab-weighted">C. Norm. Terbobot</button>
+        <button class="mlbb-tab active" data-tab="raw"      id="tab-raw">A. Matriks Awal</button>
+        <button class="mlbb-tab"        data-tab="norm"     id="tab-norm">B. Normalisasi</button>
+        <button class="mlbb-tab"        data-tab="weighted" id="tab-weighted">C. Terbobot</button>
       </div>
 
-      <div class="table-wrapper glass-card">
-        <div id="table-container">
-          <!-- filled by JS -->
-        </div>
+      <div class="mlbb-panel" id="table-panel">
+        <div id="table-container"></div>
       </div>
 
-      <!-- Heatmap -->
-      <div class="heatmap-wrapper glass-card">
-        <h3 class="chart-title">Heatmap Nilai Kriteria per Tipe Hero</h3>
-        <div id="heatmap-container">
-          <!-- filled by JS -->
+      <div class="mlbb-panel" style="margin-top:1.5rem;">
+        <div class="panel-header">
+          <div class="panel-title-gem"></div>
+          <h3 class="panel-title">Heatmap Nilai Kriteria</h3>
         </div>
+        <div id="heatmap-container"></div>
       </div>
     </div>
   </section>
 
   <!-- ===== TOPSIS SECTION ===== -->
-  <section id="topsis-section" class="section">
+  <section id="topsis-section" class="mlbb-section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Step 3</div>
-        <h2 class="section-title">Proses <span class="gradient-text">TOPSIS</span></h2>
-        <p class="section-desc">
-          Menghitung jarak ke solusi ideal positif (A⁺) dan negatif (A⁻),
-          lalu menentukan skor preferensi setiap alternatif.
-        </p>
+      <div class="mlbb-section-header">
+        <div class="mlbb-step-tag"><div class="step-diamond"><svg viewBox="0 0 16 16" width="12" height="12"><polygon points="8,1 15,8 8,15 1,8" fill="#c8a84b"/></svg></div>LANGKAH 3</div>
+        <h2 class="mlbb-section-title">Proses <span class="gold-text">TOPSIS</span></h2>
+        <p class="mlbb-section-desc">Jarak ke solusi ideal positif (A⁺) &amp; negatif (A⁻) → Skor preferensi setiap hero.</p>
+        <div class="title-ornament"><div class="orn-line"></div><svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="#c8a84b" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="#c8a84b" opacity="0.3"/></svg><div class="orn-line"></div></div>
       </div>
 
       <div class="topsis-flow">
-        <div class="flow-step glass-card">
-          <div class="flow-icon">📐</div>
-          <div class="flow-title">Ideal Positif (A⁺)</div>
-          <p class="flow-desc">Nilai terbesar dari setiap kolom kriteria pada matriks normalisasi terbobot.</p>
+        <div class="mlbb-panel flow-panel">
+          <div class="flow-icon-wrap">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <polygon points="24,4 44,14 44,34 24,44 4,34 4,14" fill="rgba(200,168,75,0.1)" stroke="#c8a84b" stroke-width="1.5"/>
+              <path d="M16 30L24 16L32 30" fill="none" stroke="#c8a84b" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M18 26H30" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4 class="flow-title">Ideal <span class="gold-text">Positif</span> (A⁺)</h4>
+          <p class="flow-desc">Nilai terbesar tiap kolom pada matriks normalisasi terbobot.</p>
           <div class="ideal-values" id="ideal-positive"></div>
         </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step glass-card">
-          <div class="flow-icon">📏</div>
-          <div class="flow-title">Ideal Negatif (A⁻)</div>
-          <p class="flow-desc">Nilai terkecil dari setiap kolom kriteria pada matriks normalisasi terbobot.</p>
+
+        <div class="flow-arrow-col">
+          <div class="flow-arrow-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 12H19M13 6L19 12L13 18" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </div>
+        </div>
+
+        <div class="mlbb-panel flow-panel">
+          <div class="flow-icon-wrap">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <polygon points="24,4 44,14 44,34 24,44 4,34 4,14" fill="rgba(255,80,80,0.1)" stroke="#ff5050" stroke-width="1.5"/>
+              <path d="M16 18L24 32L32 18" fill="none" stroke="#ff5050" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M18 22H30" stroke="#ff5050" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4 class="flow-title">Ideal <span style="color:#ff7070">Negatif</span> (A⁻)</h4>
+          <p class="flow-desc">Nilai terkecil tiap kolom pada matriks normalisasi terbobot.</p>
           <div class="ideal-values" id="ideal-negative"></div>
         </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step glass-card">
-          <div class="flow-icon">🎯</div>
-          <div class="flow-title">Skor Preferensi (Vi)</div>
-          <p class="flow-desc">Vi = D⁻ / (D⁺ + D⁻). Semakin besar Vi, semakin baik alternatif tersebut.</p>
+
+        <div class="flow-arrow-col">
+          <div class="flow-arrow-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 12H19M13 6L19 12L13 18" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </div>
+        </div>
+
+        <div class="mlbb-panel flow-panel">
+          <div class="flow-icon-wrap">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <polygon points="24,4 44,14 44,34 24,44 4,34 4,14" fill="rgba(100,200,100,0.1)" stroke="#64c864" stroke-width="1.5"/>
+              <polygon points="24,10 38,18 38,30 24,38 10,30 10,18" fill="rgba(100,200,100,0.1)" stroke="#64c864" stroke-width="1"/>
+              <circle cx="24" cy="24" r="6" fill="rgba(100,200,100,0.3)" stroke="#64c864" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h4 class="flow-title">Skor <span class="gold-text">Preferensi</span> (Vi)</h4>
+          <p class="flow-desc">Vi = D⁻ / (D⁺ + D⁻) · Semakin besar Vi → Semakin unggul.</p>
           <div class="ideal-values" id="pref-scores"></div>
         </div>
       </div>
 
-      <!-- Distance table -->
-      <div class="table-wrapper glass-card" style="margin-top:2rem;">
-        <h3 class="chart-title" style="padding:1.5rem 1.5rem 0">Tabel Jarak & Nilai Preferensi</h3>
+      <div class="mlbb-panel" style="margin-top:2rem;">
+        <div class="panel-header">
+          <div class="panel-title-gem"></div>
+          <h3 class="panel-title">Tabel Jarak &amp; Nilai Preferensi</h3>
+        </div>
         <div id="distance-table-container"></div>
       </div>
     </div>
   </section>
 
   <!-- ===== RANKING SECTION ===== -->
-  <section id="ranking-section" class="section section-alt">
+  <section id="ranking-section" class="mlbb-section mlbb-section-dark">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Hasil Akhir</div>
-        <h2 class="section-title">🏆 Ranking <span class="gradient-text">Hero MLBB</span></h2>
-        <p class="section-desc">
-          Peringkat akhir tipe hero berdasarkan skor preferensi TOPSIS.
-          Semakin tinggi skor, semakin direkomendasikan untuk Epic Tier.
-        </p>
+      <div class="mlbb-section-header">
+        <div class="mlbb-step-tag"><div class="step-diamond"><svg viewBox="0 0 16 16" width="12" height="12"><polygon points="8,1 15,8 8,15 1,8" fill="#c8a84b"/></svg></div>HASIL AKHIR</div>
+        <h2 class="mlbb-section-title">
+          <svg viewBox="0 0 28 28" width="28" height="28" style="vertical-align:middle;margin-right:8px"><polygon points="14,2 18,10 27,11 21,17 22.5,26 14,21.5 5.5,26 7,17 1,11 10,10" fill="#c8a84b"/></svg>
+          Ranking <span class="gold-text">Hero MLBB</span>
+        </h2>
+        <p class="mlbb-section-desc">Peringkat akhir berdasarkan skor preferensi TOPSIS. Semakin tinggi Vi, semakin direkomendasikan untuk Epic Tier.</p>
+        <div class="title-ornament"><div class="orn-line"></div><svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="#c8a84b" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="#c8a84b" opacity="0.3"/></svg><div class="orn-line"></div></div>
       </div>
 
-      <div class="ranking-cards" id="ranking-cards">
-        <!-- filled by JS -->
+      <div class="ranking-cards" id="ranking-cards"></div>
+
+      <div class="mlbb-panel" style="margin-top:2rem;">
+        <div class="panel-header"><div class="panel-title-gem"></div><h3 class="panel-title">Perbandingan Skor TOPSIS</h3></div>
+        <div class="score-bars" id="score-bars"></div>
       </div>
 
-      <!-- Radar / Progress chart -->
-      <div class="glass-card" style="margin-top:2rem; padding:2rem;">
-        <h3 class="chart-title">Perbandingan Skor TOPSIS</h3>
-        <div class="score-bars" id="score-bars">
-          <!-- filled by JS -->
-        </div>
-      </div>
-
-      <!-- Criteria per hero breakdown -->
-      <div class="glass-card" style="margin-top:2rem; padding:2rem;">
-        <h3 class="chart-title">Nilai Kriteria per Tipe Hero (Radar Chart)</h3>
-        <canvas id="radar-canvas" width="600" height="400" style="max-width:100%;display:block;margin:auto;"></canvas>
+      <div class="mlbb-panel" style="margin-top:2rem;">
+        <div class="panel-header"><div class="panel-title-gem"></div><h3 class="panel-title">Radar Perbandingan Nilai Kriteria</h3></div>
+        <canvas id="radar-canvas" width="600" height="420" style="max-width:100%;display:block;margin:auto;"></canvas>
+        <div class="radar-legend" id="radar-legend"></div>
       </div>
     </div>
   </section>
 
   <!-- ===== SIMULATOR SECTION ===== -->
-  <section id="simulator-section" class="section">
+  <section id="simulator-section" class="mlbb-section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Interaktif</div>
-        <h2 class="section-title">🎮 Simulator <span class="gradient-text">Bobot</span></h2>
-        <p class="section-desc">
-          Ubah bobot kriteria sesuai preferensimu dan lihat bagaimana hasilnya berubah secara real-time!
-        </p>
+      <div class="mlbb-section-header">
+        <div class="mlbb-step-tag"><div class="step-diamond"><svg viewBox="0 0 16 16" width="12" height="12"><polygon points="8,1 15,8 8,15 1,8" fill="#c8a84b"/></svg></div>INTERAKTIF</div>
+        <h2 class="mlbb-section-title">Simulator <span class="gold-text">Bobot</span></h2>
+        <p class="mlbb-section-desc">Ubah bobot kriteria sesuai preferensimu — ranking akan berubah secara real-time!</p>
+        <div class="title-ornament"><div class="orn-line"></div><svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="#c8a84b" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="#c8a84b" opacity="0.3"/></svg><div class="orn-line"></div></div>
       </div>
 
       <div class="simulator-layout">
-        <div class="sim-controls glass-card">
-          <h3 class="sim-title">Atur Bobot Kriteria</h3>
-          <p class="sim-hint">Total bobot harus = 1.00</p>
-          <div id="weight-sliders">
-            <!-- filled by JS -->
+        <div class="mlbb-panel sim-controls">
+          <div class="panel-header"><div class="panel-title-gem"></div><h3 class="panel-title">Atur Bobot Kriteria</h3></div>
+          <p class="sim-hint">Total bobot harus = 1.00 untuk hasil optimal</p>
+          <div id="weight-sliders"></div>
+          <div class="sim-total-bar">
+            <span>Total Bobot</span>
+            <span id="total-weight" class="sim-total-val">1.00</span>
           </div>
-          <div class="sim-total">
-            <span>Total Bobot:</span>
-            <span id="total-weight" class="total-weight-value">1.00</span>
-          </div>
-          <button class="btn-primary" id="btn-reset-weights" style="width:100%;margin-top:1rem;">
-            🔄 Reset ke Bobot AHP
+          <button class="mlbb-btn mlbb-btn-primary" id="btn-reset-weights" style="width:100%;margin-top:1.2rem;">
+            <svg viewBox="0 0 20 20" width="16" height="16"><path fill="currentColor" d="M4 10C4 6.7 6.7 4 10 4C12 4 13.8 5 14.9 6.5L13 8H18V3L16.2 4.8C14.7 3 12.5 2 10 2C5.6 2 2 5.6 2 10H4ZM16 10C16 13.3 13.3 16 10 16C8 16 6.2 15 5.1 13.5L7 12H2V17L3.8 15.2C5.3 17 7.5 18 10 18C14.4 18 18 14.4 18 10H16Z"/></svg>
+            Reset ke Bobot AHP
           </button>
-          <button class="btn-secondary" id="btn-recalculate" style="width:100%;margin-top:0.5rem;">
-            ⚡ Hitung Ulang
+          <button class="mlbb-btn mlbb-btn-secondary" id="btn-recalculate" style="width:100%;margin-top:0.6rem;">
+            <svg viewBox="0 0 20 20" width="16" height="16"><polygon fill="currentColor" points="10,2 13,8 20,9 15,14 16,21 10,17.5 4,21 5,14 0,9 7,8"/></svg>
+            Hitung Ulang
           </button>
         </div>
 
-        <div class="sim-result glass-card">
-          <h3 class="sim-title">Hasil Simulasi</h3>
-          <div id="sim-ranking-list">
-            <!-- filled by JS -->
-          </div>
+        <div class="mlbb-panel sim-result">
+          <div class="panel-header"><div class="panel-title-gem"></div><h3 class="panel-title">Hasil Simulasi</h3></div>
+          <div id="sim-ranking-list"></div>
           <div class="sim-note" id="sim-note"></div>
         </div>
       </div>
@@ -287,34 +485,46 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <footer class="mlbb-footer">
+    <div class="footer-ornament-top">
+      <svg viewBox="0 0 1440 30" preserveAspectRatio="none" width="100%" height="30">
+        <path d="M0,15 L180,3 L360,20 L540,5 L720,22 L900,4 L1080,19 L1260,6 L1440,18" fill="none" stroke="rgba(200,168,75,0.3)" stroke-width="1"/>
+        <path d="M0,18 L180,6 L360,23 L540,8 L720,25 L900,7 L1080,22 L1260,9 L1440,21" fill="none" stroke="rgba(200,168,75,0.12)" stroke-width="1"/>
+      </svg>
+    </div>
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-left">
+        <div class="footer-logo-block">
           <div class="footer-logo">
-            <span>⚔️</span> SPK Hero MLBB
+            <svg viewBox="0 0 40 40" width="38" height="38">
+              <polygon points="20,2 38,11 38,29 20,38 2,29 2,11" fill="none" stroke="#c8a84b" stroke-width="1.5"/>
+              <polygon points="20,8 32,14 32,26 20,32 8,26 8,14" fill="rgba(200,168,75,0.1)"/>
+              <text x="20" y="25" text-anchor="middle" fill="#c8a84b" font-size="13" font-weight="bold" font-family="serif">M</text>
+            </svg>
+            <span>SPK HERO MLBB</span>
           </div>
-          <p class="footer-desc">
-            Sistem Pendukung Keputusan – Mata Kuliah SPK<br />
-            Metode AHP-TOPSIS | Epic Tier | 30 Responden
-          </p>
+          <p class="footer-desc">Sistem Pendukung Keputusan<br/>Mata Kuliah SPK · Metode AHP-TOPSIS</p>
         </div>
-        <div class="footer-right">
-          <p class="footer-ref">
-            📄 Sumber: Abidin, Fairuzabadi &amp; Wibawa (2024).<br />
-            JTH Vol.1 No.4, pp.217-232.
-          </p>
-          <p class="footer-ref">
-            CR AHP = 0.0996 &lt; 0.1 → Konsisten ✓
-          </p>
+        <div class="footer-divider-vert"></div>
+        <div class="footer-info">
+          <p class="footer-ref"><strong class="gold-text">Sumber:</strong> Abidin, Fairuzabadi &amp; Wibawa (2024)</p>
+          <p class="footer-ref">JTH Vol.1 No.4, pp.217-232</p>
+          <p class="footer-ref" style="margin-top:0.5rem">CR AHP = 0.0996 &lt; 0.1 &nbsp;<span class="gold-text">→ Konsisten ✓</span></p>
+        </div>
+        <div class="footer-divider-vert"></div>
+        <div class="footer-stats-block">
+          <div class="footer-stat"><span class="footer-stat-num">5</span><span class="footer-stat-lbl">Tipe Hero</span></div>
+          <div class="footer-stat"><span class="footer-stat-num">30</span><span class="footer-stat-lbl">Responden</span></div>
+          <div class="footer-stat"><span class="footer-stat-num">EPIC</span><span class="footer-stat-lbl">Tier</span></div>
         </div>
       </div>
       <div class="footer-bottom">
-        © 2024 Sistem Pendukung Keputusan · Hero Mobile Legends Bang Bang
+        <div class="footer-bottom-line"></div>
+        <p>© 2024 Sistem Pendukung Keputusan · Hero Mobile Legends Bang Bang · AHP-TOPSIS</p>
       </div>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="mlbb-app.js"></script>
 </body>
 </html>
