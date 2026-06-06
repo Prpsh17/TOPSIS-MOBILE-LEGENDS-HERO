@@ -162,7 +162,24 @@ body {
 }
 
 .logo-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   filter: drop-shadow(0 0 8px rgba(200,168,75,0.5));
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 6px rgba(200,168,75,0.4));
+  transition: var(--transition);
+}
+
+.nav-logo:hover .logo-img {
+  filter: drop-shadow(0 0 14px rgba(200,168,75,0.9)) brightness(1.15);
+  transform: scale(1.06);
 }
 
 .logo-text-block {
@@ -1794,6 +1811,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
   text-shadow: 0 0 12px rgba(200,168,75,0.3);
 }
 
+.footer-logo-img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 6px rgba(200,168,75,0.4));
+  flex-shrink: 0;
+}
+
 .footer-desc {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;
@@ -1912,6 +1938,38 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .ranking-cards { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; gap: 2rem; }
   .footer-divider-vert { display: none; }
+
+  /* Logo responsive - shrink image a little */
+  .logo-img { width: 36px; height: 36px; }
+  .logo-main { font-size: 0.9rem; }
+  .logo-sub { font-size: 0.56rem; }
+
+  /* Nav container tighter on mobile */
+  .nav-container { padding: 0 1rem; gap: 0.75rem; }
+
+  /* Mobile menu logo alignment */
+  .mobile-menu {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(200,168,75,0.1);
+  }
+  .mob-link {
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(200,168,75,0.08);
+  }
+  .mob-link:last-child { border-bottom: none; }
+
+  /* Section header adjustments */
+  .mlbb-section-header { margin-bottom: 2.5rem; }
+
+  /* Table horizontal scroll */
+  .mlbb-panel { overflow-x: auto; }
+
+  /* Footer */
+  .footer-inner { text-align: center; align-items: center; }
+  .footer-logo-block { align-items: center; }
+  .footer-logo { justify-content: center; }
+  .footer-stats-block { justify-content: center; }
 }
 
 @media (max-width: 480px) {
@@ -1921,4 +1979,23 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .bar-row { grid-template-columns: 100px 1fr 55px; }
   .hero-stats-row { gap: 0.6rem; }
   .stat-gem-card { min-width: 78px; padding: 0.8rem 0.9rem; }
+
+  /* Even smaller logo on very small screens */
+  .logo-img { width: 32px; height: 32px; }
+  .logo-text-block { display: none; }  /* hide text on tiny screens, show only logo */
+
+  /* Hamburger always visible */
+  .nav-container { height: 60px; }
+  .mobile-menu { top: 60px; }
+
+  /* Hero title smaller */
+  .hero-cta { flex-direction: column; align-items: center; }
+  .mlbb-btn { width: 100%; max-width: 280px; justify-content: center; }
+
+  /* Ranking cards compact */
+  .rank-card { padding: 1.25rem; }
+  .rank-score { font-size: 1.8rem; }
+
+  /* Simulator full width buttons */
+  .sim-controls, .sim-result { padding: 1rem; }
 }
