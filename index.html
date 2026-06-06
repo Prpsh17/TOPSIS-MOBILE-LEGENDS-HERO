@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPK Hero MLBB – Metode AHP-TOPSIS</title>
+  <meta name="description" content="Sistem Pendukung Keputusan pemilihan Hero Mobile Legends Bang Bang tier Epic menggunakan metode AHP-TOPSIS berdasarkan 30 responden." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <!-- Particle canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">SPK <span class="logo-accent">MLBB</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero-section" class="nav-link active">Beranda</a></li>
+        <li><a href="#kriteria-section" class="nav-link">Kriteria</a></li>
+        <li><a href="#matriks-section" class="nav-link">Matriks</a></li>
+        <li><a href="#topsis-section" class="nav-link">TOPSIS</a></li>
+        <li><a href="#ranking-section" class="nav-link">Ranking</a></li>
+        <li><a href="#simulator-section" class="nav-link">Simulator</a></li>
+      </ul>
+      <div class="nav-badge">AHP-TOPSIS</div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero-section" class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Sistem Pendukung Keputusan · Epic Tier
+      </div>
+      <h1 class="hero-title">
+        Pemilihan Hero<br />
+        <span class="gradient-text">Mobile Legends</span><br />
+        Terbaik
+      </h1>
+      <p class="hero-subtitle">
+        Menggunakan metode <strong>AHP-TOPSIS</strong> dengan 5 kriteria utama
+        berdasarkan penilaian <strong>30 responden</strong> Epic Tier.
+        Temukan hero yang paling optimal untuk dimainkan!
+      </p>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Tipe Hero</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Kriteria</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">30</span>
+          <span class="stat-label">Responden</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">AHP</span>
+          <span class="stat-label">Metode Bobot</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#ranking-section" class="btn-primary" id="btn-lihat-ranking">
+          🏆 Lihat Ranking
+        </a>
+        <a href="#simulator-section" class="btn-secondary" id="btn-simulator">
+          🎮 Coba Simulator
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hcard hcard-1">
+          <div class="hcard-rank">#1</div>
+          <div class="hcard-icon">⚔️</div>
+          <div class="hcard-name">Fighter</div>
+          <div class="hcard-score">0.8527</div>
+        </div>
+        <div class="hcard hcard-2">
+          <div class="hcard-rank">#2</div>
+          <div class="hcard-icon">🛡️</div>
+          <div class="hcard-name">Tank</div>
+          <div class="hcard-score">0.6978</div>
+        </div>
+        <div class="hcard hcard-3">
+          <div class="hcard-rank">#3</div>
+          <div class="hcard-icon">🔮</div>
+          <div class="hcard-name">Mage</div>
+          <div class="hcard-score">0.5152</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KRITERIA SECTION ===== -->
+  <section id="kriteria-section" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Step 1</div>
+        <h2 class="section-title">Kriteria & Bobot <span class="gradient-text">AHP</span></h2>
+        <p class="section-desc">
+          Lima kriteria penilaian dengan bobot dihitung menggunakan metode AHP.
+          CR = 0.0996 &lt; 0.1 → Konsisten.
+        </p>
+      </div>
+
+      <div class="criteria-grid" id="criteria-grid">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- AHP Weight Chart -->
+      <div class="chart-wrapper glass-card">
+        <h3 class="chart-title">Distribusi Bobot AHP</h3>
+        <div class="bar-chart" id="ahp-bar-chart">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MATRIKS KEPUTUSAN ===== -->
+  <section id="matriks-section" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Step 2</div>
+        <h2 class="section-title">Matriks <span class="gradient-text">Keputusan</span></h2>
+        <p class="section-desc">
+          Nilai rata-rata penilaian 30 responden Epic Tier (skala 1–5) per tipe hero.
+        </p>
+      </div>
+
+      <!-- Tab selector -->
+      <div class="tab-bar" id="tab-bar">
+        <button class="tab-btn active" data-tab="raw" id="tab-raw">A. Matriks Awal</button>
+        <button class="tab-btn" data-tab="norm" id="tab-norm">B. Normalisasi</button>
+        <button class="tab-btn" data-tab="weighted" id="tab-weighted">C. Norm. Terbobot</button>
+      </div>
+
+      <div class="table-wrapper glass-card">
+        <div id="table-container">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- Heatmap -->
+      <div class="heatmap-wrapper glass-card">
+        <h3 class="chart-title">Heatmap Nilai Kriteria per Tipe Hero</h3>
+        <div id="heatmap-container">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOPSIS SECTION ===== -->
+  <section id="topsis-section" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Step 3</div>
+        <h2 class="section-title">Proses <span class="gradient-text">TOPSIS</span></h2>
+        <p class="section-desc">
+          Menghitung jarak ke solusi ideal positif (A⁺) dan negatif (A⁻),
+          lalu menentukan skor preferensi setiap alternatif.
+        </p>
+      </div>
+
+      <div class="topsis-flow">
+        <div class="flow-step glass-card">
+          <div class="flow-icon">📐</div>
+          <div class="flow-title">Ideal Positif (A⁺)</div>
+          <p class="flow-desc">Nilai terbesar dari setiap kolom kriteria pada matriks normalisasi terbobot.</p>
+          <div class="ideal-values" id="ideal-positive"></div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step glass-card">
+          <div class="flow-icon">📏</div>
+          <div class="flow-title">Ideal Negatif (A⁻)</div>
+          <p class="flow-desc">Nilai terkecil dari setiap kolom kriteria pada matriks normalisasi terbobot.</p>
+          <div class="ideal-values" id="ideal-negative"></div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step glass-card">
+          <div class="flow-icon">🎯</div>
+          <div class="flow-title">Skor Preferensi (Vi)</div>
+          <p class="flow-desc">Vi = D⁻ / (D⁺ + D⁻). Semakin besar Vi, semakin baik alternatif tersebut.</p>
+          <div class="ideal-values" id="pref-scores"></div>
+        </div>
+      </div>
+
+      <!-- Distance table -->
+      <div class="table-wrapper glass-card" style="margin-top:2rem;">
+        <h3 class="chart-title" style="padding:1.5rem 1.5rem 0">Tabel Jarak & Nilai Preferensi</h3>
+        <div id="distance-table-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RANKING SECTION ===== -->
+  <section id="ranking-section" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Hasil Akhir</div>
+        <h2 class="section-title">🏆 Ranking <span class="gradient-text">Hero MLBB</span></h2>
+        <p class="section-desc">
+          Peringkat akhir tipe hero berdasarkan skor preferensi TOPSIS.
+          Semakin tinggi skor, semakin direkomendasikan untuk Epic Tier.
+        </p>
+      </div>
+
+      <div class="ranking-cards" id="ranking-cards">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- Radar / Progress chart -->
+      <div class="glass-card" style="margin-top:2rem; padding:2rem;">
+        <h3 class="chart-title">Perbandingan Skor TOPSIS</h3>
+        <div class="score-bars" id="score-bars">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- Criteria per hero breakdown -->
+      <div class="glass-card" style="margin-top:2rem; padding:2rem;">
+        <h3 class="chart-title">Nilai Kriteria per Tipe Hero (Radar Chart)</h3>
+        <canvas id="radar-canvas" width="600" height="400" style="max-width:100%;display:block;margin:auto;"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIMULATOR SECTION ===== -->
+  <section id="simulator-section" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Interaktif</div>
+        <h2 class="section-title">🎮 Simulator <span class="gradient-text">Bobot</span></h2>
+        <p class="section-desc">
+          Ubah bobot kriteria sesuai preferensimu dan lihat bagaimana hasilnya berubah secara real-time!
+        </p>
+      </div>
+
+      <div class="simulator-layout">
+        <div class="sim-controls glass-card">
+          <h3 class="sim-title">Atur Bobot Kriteria</h3>
+          <p class="sim-hint">Total bobot harus = 1.00</p>
+          <div id="weight-sliders">
+            <!-- filled by JS -->
+          </div>
+          <div class="sim-total">
+            <span>Total Bobot:</span>
+            <span id="total-weight" class="total-weight-value">1.00</span>
+          </div>
+          <button class="btn-primary" id="btn-reset-weights" style="width:100%;margin-top:1rem;">
+            🔄 Reset ke Bobot AHP
+          </button>
+          <button class="btn-secondary" id="btn-recalculate" style="width:100%;margin-top:0.5rem;">
+            ⚡ Hitung Ulang
+          </button>
+        </div>
+
+        <div class="sim-result glass-card">
+          <h3 class="sim-title">Hasil Simulasi</h3>
+          <div id="sim-ranking-list">
+            <!-- filled by JS -->
+          </div>
+          <div class="sim-note" id="sim-note"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <div class="footer-logo">
+            <span>⚔️</span> SPK Hero MLBB
+          </div>
+          <p class="footer-desc">
+            Sistem Pendukung Keputusan – Mata Kuliah SPK<br />
+            Metode AHP-TOPSIS | Epic Tier | 30 Responden
+          </p>
+        </div>
+        <div class="footer-right">
+          <p class="footer-ref">
+            📄 Sumber: Abidin, Fairuzabadi &amp; Wibawa (2024).<br />
+            JTH Vol.1 No.4, pp.217-232.
+          </p>
+          <p class="footer-ref">
+            CR AHP = 0.0996 &lt; 0.1 → Konsisten ✓
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2024 Sistem Pendukung Keputusan · Hero Mobile Legends Bang Bang
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

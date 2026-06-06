@@ -1,0 +1,83 @@
+﻿Sheet names: ['Jarak dan Hasil', 'Normalisasi Terbobot', 'Normalisasi', 'Matriks Keputusan', 'Bobot & Kriteria', 'Rekap Ranking']
+
+=== Sheet: Jarak dan Hasil ===
+Dimensions: A1:G7
+('D. JARAK DAN NILAI PREFERENSI (SKOR TOPSIS)', None, None, None, None, None, None)
+('No', 'Tipe Hero', 'DΓü║ (Jarak ke AΓü║)', 'DΓü╗ (Jarak ke AΓü╗)', 'Skor Preferensi (Vi)', 'Ranking', 'Keterangan')
+(1, 'Tank/Roamer', 0.04078783, 0.09416791, 0.697769, 2, 'BAIK Γ£ô')
+(2, 'Assassin/Jungler', 0.10762282, 0.03431328, 0.241752, 4, None)
+(3, 'Marksman', 0.10707061, 0.0255645, 0.192743, 5, None)
+(4, 'Mage', 0.05882135, 0.06252014, 0.515241, 3, None)
+(5, 'Fighter', 0.01883538, 0.1090228, 0.852685, 1, 'TERBAIK Γÿà')
+
+=== Sheet: Normalisasi Terbobot ===
+Dimensions: A1:H9
+('C. MATRIKS NORMALISASI TERBOBOT (vij = wj ├ù rij)', None, None, None, None, None, None, None)
+('No', 'Tipe Hero', 'v1 (C1)', 'v2 (C2)', 'v3 (C3)', 'v4 (C4)', 'v5 (C5)', None)
+(1, 'Tank/Roamer', 0.21576947, 0.10260712, 0.05758664, 0.06805173, 0.02567038, None)
+(2, 'Assassin/Jungler', 0.12829536, 0.11264476, 0.08871444, 0.03824404, 0.03473053, None)
+(3, 'Marksman', 0.13218329, 0.10260712, 0.08093255, 0.03318233, 0.03533457, None)
+(4, 'Mage', 0.18466776, 0.12156689, 0.07548501, 0.03486957, 0.03261653, None)
+(5, 'Fighter', 0.23132062, 0.11822101, 0.07392877, 0.06074044, 0.02687846, None)
+(None, 'AΓü║ (Ideal Positif)', 0.23132062, 0.12156689, 0.08871444, 0.06805173, 0.03533457, None)
+(None, 'AΓü╗ (Ideal Negatif)', 0.12829536, 0.10260712, 0.05758664, 0.03318233, 0.02567038, None)
+
+=== Sheet: Normalisasi ===
+Dimensions: A1:H7
+('B. MATRIKS NORMALISASI (rij = Xij / ΓêÜ(╬úXij┬▓))', None, None, None, None, None, None, None)
+('No', 'Tipe Hero', 'r1 (C1)', 'r2 (C2)', 'r3 (C3)', 'r4 (C4)', 'r5 (C5)', None)
+(1, 'Tank/Roamer', 0.526267, 0.4104285, 0.3387449, 0.6186521, 0.3667198, None)
+(2, 'Assassin/Jungler', 0.3129155, 0.4505791, 0.5218496, 0.3476731, 0.4961504, None)
+(3, 'Marksman', 0.3223983, 0.4104285, 0.4760738, 0.3016576, 0.5047796, None)
+(4, 'Mage', 0.4504092, 0.4862676, 0.4440295, 0.3169961, 0.4659504, None)
+(5, 'Fighter', 0.5641966, 0.472884, 0.4348751, 0.5521858, 0.3839781, None)
+
+=== Sheet: Matriks Keputusan ===
+Dimensions: A1:I10
+('A. MATRIKS KEPUTUSAN (DATA NILAI RATA-RATA RESPONDEN PER TIPE HERO)', None, None, None, None, None, None, None, None)
+('Nilai = Rata-rata penilaian 30 responden (skala 1-5) dari Data Responden Form SPK', None, None, None, None, None, None, None, None)
+('No', 'Tipe Hero', 'Contoh Hero', 'Role', 'C1 CC', 'C2 AoE', 'C3 DMG', 'C4 DUR', 'C5 LG')
+(1, 'Tank/Roamer', 'Tigreal, Khufra, Gatot Kaca', 'Roaming / Support', 3.7, 3.06667, 2.46667, 4.03333, 2.83333)
+(2, 'Assassin/Jungler', 'Yi-Sun-Shin, Lancelot, Ling', 'Jungler', 2.2, 3.36667, 3.8, 2.26667, 3.83333)
+(3, 'Marksman', 'Granger, Bruno, Brody', 'Gold Lane', 2.26667, 3.06667, 3.46667, 1.96667, 3.9)
+(4, 'Mage', 'Pharsa, Kadita, Odette', 'Mid Lane', 3.16667, 3.63333, 3.23333, 2.06667, 3.6)
+(5, 'Fighter', 'Chou, Yu Zhong, Lapu-Lapu', 'EXP Lane', 3.96667, 3.53333, 3.16667, 3.6, 2.96667)
+(None, 'ΓêÜ(╬úXij┬▓)', 'Normalisasi pembagi', None, 7.030652, 7.471874, 7.281791, 6.519544, 7.726144)
+(None, 'Bobot AHP (wj)', 'Dari perhitungan AHP (CR<0.1)', None, 0.41, 0.25, 0.17, 0.11, 0.07)
+
+=== Sheet: Bobot & Kriteria ===
+Dimensions: A1:E13
+('SISTEM PENDUKUNG KEPUTUSAN ΓÇô PEMILIHAN HERO MOBILE LEGENDS EPIC TIER', None, None, None, None)
+('Metode AHP-TOPSIS  |  Bobot Kriteria dari AHP (Jurnal: JTH Vol.1 No.4 2024 pp.217-232)', None, None, None, None)
+(None, None, None, None, None)
+('TABEL BOBOT KRITERIA (DARI METODE AHP ΓÇô SESUAI JURNAL)', None, None, None, None)
+('Kode', 'Nama Kriteria', 'Bobot', 'Tipe', 'Keterangan')
+('C1', 'Crowd Control (CC)', 0.41, 'Benefit', 'Kemampuan menghentikan gerak musuh (Stun, Slow, Knockback) ΓÇô Bobot tertinggi')
+('C2', 'Serangan Area (AoE)', 0.25, 'Benefit', 'Kemampuan memberi damage/efek pada area luas')
+('C3', 'Damage Besar & Skill Escaping', 0.17, 'Benefit', 'Kemampuan burst damage dan melarikan diri dari bahaya')
+('C4', 'Daya Tahan Tinggi (Durability)', 0.11, 'Benefit', 'Ketebalan HP dan pertahanan hero dalam pertempuran')
+('C5', 'Hero Late Game', 0.07, 'Benefit', 'Kekuatan maksimal hero di fase akhir permainan')
+('TOTAL', None, '=SUM(C6:C10)', None, 'CR = 0.0996 < 0.1 ΓåÆ Konsisten (sesuai jurnal)')
+(None, None, None, None, None)
+('Sumber: Abidin, Fairuzabadi & Wibawa (2024). JTH Vol.1 No.4, pp.217-232. DOI: Tabel 3 & 4.', None, None, None, None)
+
+=== Sheet: Rekap Ranking ===
+Dimensions: A1:K18
+('REKAPITULASI RANKING ΓÇô PEMILIHAN HERO MOBILE LEGENDS EPIC TIER', None, None, None, None, None, None, None, None, None, None)
+('Metode AHP-TOPSIS  |  Bobot AHP: C1=41%, C2=25%, C3=17%, C4=11%, C5=7%  |  30 Responden Epic Tier', None, None, None, None, None, None, None, None, None, None)
+('No', 'Tipe Hero', 'Contoh Hero', 'C1 CC', 'C2 AoE', 'C3 DMG', 'C4 DUR', 'C5 LG', 'Skor TOPSIS', 'Ranking', 'Status')
+(1, 'Fighter', 'Chou, Yu Zhong, Lapu-Lapu', 3.96667, 3.53333, 3.16667, 3.6, 2.96667, 0.852685, 1, '≡ƒÑç TERBAIK (Direkomendasikan)')
+(2, 'Tank/Roamer', 'Tigreal, Khufra, Gatot Kaca', 3.7, 3.06667, 2.46667, 4.03333, 2.83333, 0.697769, 2, '≡ƒÑê BAIK')
+(3, 'Mage', 'Pharsa, Kadita, Odette', 3.16667, 3.63333, 3.23333, 2.06667, 3.6, 0.515241, 3, '≡ƒÑë CUKUP BAIK')
+(4, 'Assassin/Jungler', 'Yi-Sun-Shin, Lancelot, Ling', 2.2, 3.36667, 3.8, 2.26667, 3.83333, 0.241752, 4, '-')
+(5, 'Marksman', 'Granger, Bruno, Brody', 2.26667, 3.06667, 3.46667, 1.96667, 3.9, 0.192743, 5, '-')
+(None, None, None, None, None, None, None, None, None, None, None)
+('RINGKASAN STATISTIK PER KRITERIA', None, None, None, None, None, None, None, None, None, None)
+('C1 ΓÇô Crowd Control (CC)', 2.2, 3.96667, 3.06, 'Tipe Hero Terbaik (Nilai Tertinggi)', 'Fighter', None, None, None, None, None)
+('C2 ΓÇô Serangan Area (AoE)', 3.06667, 3.63333, 3.33333, None, 'Mage', None, None, None, None, None)
+('C3 ΓÇô Damage Besar & Skill Escaping', 2.46667, 3.8, 3.22667, None, 'Assassin/Jungler', None, None, None, None, None)
+('C4 ΓÇô Daya Tahan Tinggi (Durability)', 1.96667, 4.03333, 2.78667, None, 'Tank/Roamer', None, None, None, None, None)
+('C5 ΓÇô Hero Late Game', 2.83333, 3.9, 3.42667, None, 'Marksman', None, None, None, None, None)
+('C5 ΓÇô Hero Late Game', 2.57143, 3.7619, 3.24762, None, 'Assassin/Jungler', None, None, None, None, None)
+(None, None, None, None, None, None, None, None, None, None, None)
+('CATATAN: Bobot AHP diambil dari hasil survei & perhitungan AHP (Tabel 3 & 4 jurnal). CR = 0.0996 < 0.1 (konsisten). Sumber: Abidin, Fairuzabadi & Wibawa (2024). JTH Vol.1 No.4, pp.217-232.', None, None, None, None, None, None, None, None, None, None)
